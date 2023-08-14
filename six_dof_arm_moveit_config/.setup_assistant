@@ -1,0 +1,27 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: six_dof_arm
+    relative_path: urdf/six_dof_arm.urdf
+  srdf:
+    relative_path: config/six_dof_arm.srdf
+  package_settings:
+    author_name: Karan Kapoor
+    author_email: karan.kapoor@uwaterloo.ca
+    generated_timestamp: 1690434319
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
