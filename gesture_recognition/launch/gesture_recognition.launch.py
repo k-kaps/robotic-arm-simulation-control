@@ -7,11 +7,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    image_subscriber_node = Node(
-        package = "gesture_recognition",
-        executable = "image_subscriber_node",
-        name = "image_subscriber_node"
-    )
 
     image_publisher_node = Node(
         package = "gesture_recognition",
@@ -19,7 +14,13 @@ def generate_launch_description():
         name = "image_publisher_node"
     )
 
+    image_subscriber_node = Node(
+        package = "gesture_recognition",
+        executable = "image_subscriber_node",
+        name = "image_subscriber_node"
+    )
+
     return LaunchDescription([
-        image_publisher_node, 
+        image_publisher_node,
         image_subscriber_node,
     ])

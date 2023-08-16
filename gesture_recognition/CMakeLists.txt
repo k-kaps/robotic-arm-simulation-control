@@ -28,22 +28,22 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-#add_executable(image_subscriber_node src/image_subscriber_node.cpp)
-#ament_target_dependencies(image_subscriber_node rclcpp sensor_msgs cv_bridge)
-
 add_executable(image_publisher_node src/image_publisher_node.cpp)
 ament_target_dependencies(image_publisher_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
 
-install(TARGETS image_publisher_node
-        DESTINATION /lib/${PROJECT_NAME})
+add_executable(image_subscriber_node src/image_subscriber_node.cpp src/gesture_recognition.cpp)
+ament_target_dependencies(image_subscriber_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
+
+install(TARGETS image_publisher_node image_subscriber_node
+        DESTINATION lib/${PROJECT_NAME})
 
 target_include_directories(image_publisher_node PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-#target_include_directories(image_subscriber_node PRIVATE
-#        ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(image_subscriber_node PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-install(DIRECTORY launch
+install(DIRECTORY launch 
         DESTINATION share/${PROJECT_NAME})
 
 ament_package()

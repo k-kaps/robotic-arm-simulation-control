@@ -1,9 +1,14 @@
-#ifndef GESTURE_RECOGNITION_HPP
-#define GESTURE_RECOGNITION_HPP
+#ifndef GESTURE_RECOGNIITON_HPP_
+#define GESTURE_RECOGNIITON_HPP_
 
 #include <cstdlib>
 #include "sensor_msgs/msg/image.hpp"
 
-std::string gestureRecognition(sensor_msgs::msg::Image::SharedPtr image_msg);
+class GestureRecognition{
+public:
+    GestureRecognition();
+    std::string gesture;
+    std::string findGesture(sensor_msgs::msg::Image::SharedPtr image_msg);
+};
 
-#endif //GESTURE_RECOGNITION_HPP
+#endif //GESTURE_RECOGNIITON_HPP_

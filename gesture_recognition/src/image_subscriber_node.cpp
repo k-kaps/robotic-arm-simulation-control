@@ -2,6 +2,7 @@
 
 ImageSubscriberNode::ImageSubscriberNode() : Node("image_subscriber_node") {
 	image_subscriber = this->create_subscription<sensor_msgs::msg::Image>("image_topic", 10, std::bind(&ImageSubscriberNode::imageProcessing, this, std::placeholders::_1));
+	gesture_recognition_ = std::make_shared<GestureRecognition>();
 }
 
 void ImageSubscriberNode::imageProcessing(sensor_msgs::msg::Image::SharedPtr image_msg)const {
@@ -9,7 +10,9 @@ void ImageSubscriberNode::imageProcessing(sensor_msgs::msg::Image::SharedPtr ima
 		RCLCPP_ERROR(this->get_logger(), "ERROR : No data recieved, image data empty");
 	}
 	else{
-		RCLCPP_INFO(this->get_logger(), "SUCCESS : Image recieved, sent for processing");
+		//Send image for processing
+		std::string response = gesture_recognition_->findGesture(image_msg);
+		RCLCPP_INFO(this->get_logger(), "%s was detected",response.c_str());
 	}
 	rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber;
 }

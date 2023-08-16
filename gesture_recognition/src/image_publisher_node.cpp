@@ -6,7 +6,7 @@ using namespace std::chrono_literals;
 * member function as a callback from the timer. */
 ImagePublisherNode::ImagePublisherNode() : Node("image__publisher_node"), count_(0){
 	image_publisher = this->create_publisher<sensor_msgs::msg::Image>("image_topic", 10);
-	timer = this->create_wall_timer(500ms, std::bind(&ImagePublisherNode::publishImage, this));
+	timer = this->create_wall_timer(100ms, std::bind(&ImagePublisherNode::publishImage, this));
 
 }
 
@@ -24,7 +24,7 @@ void ImagePublisherNode::publishImage(){
 		RCLCPP_INFO(this->get_logger(), "Published Image %ld", count_);
 		count_++;
 	}
-	count_++;
+	
 	rclcpp::TimerBase::SharedPtr timer;
 	sensor_msgs::msg::Image::SharedPtr msg;
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_publisher;
