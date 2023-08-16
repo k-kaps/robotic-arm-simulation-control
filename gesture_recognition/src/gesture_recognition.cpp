@@ -9,4 +9,3 @@ std::string GestureRecognition::findGesture(sensor_msgs::msg::Image::SharedPtr i
     gesture = "some gesture";
     return gesture;
 }
->>>>>>> master
