@@ -1,1 +1,1 @@
-# six-dof-arm-ROS
+# Robotic Arm - Simulation and Control
