@@ -1,6 +1,7 @@
 #include "gesture_recognition/gesture_recognition.hpp"
 
 GestureRecognition::GestureRecognition(){
+    // Initializing the gesture variable
     gesture = "";
 }
 

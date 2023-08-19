@@ -7,8 +7,9 @@
 class GestureRecognition{
 public:
     GestureRecognition();
-    std::string gesture;
     std::string findGesture(sensor_msgs::msg::Image::SharedPtr image_msg);
+private :
+    std::string gesture;
 };
 
 #endif //GESTURE_RECOGNIITON_HPP_
