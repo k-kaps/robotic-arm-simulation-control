@@ -20,9 +20,9 @@ public:
 private:
     void publishImage();
 
-    rclcpp::TimerBase::SharedPtr timer;
-	sensor_msgs::msg::Image::SharedPtr msg;
-    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_publisher;
+    rclcpp::TimerBase::SharedPtr timer_;
+	sensor_msgs::msg::Image::SharedPtr msg_;
+    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_publisher_;
     size_t count_;
 };
 

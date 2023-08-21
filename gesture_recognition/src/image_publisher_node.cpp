@@ -18,7 +18,7 @@ void ImagePublisherNode::publishImage(){
 	if (!frame.empty()){
 		// Converting the Mat to a image message
 		msg_ = cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
-		image_publisher->publish(*msg_.get());
+		image_publisher_->publish(*msg_.get());
 
 		RCLCPP_INFO(this->get_logger(), "Published Image %ld", count_);
 		count_++;
@@ -34,5 +34,5 @@ int main(int argc, char * argv[]){
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<ImagePublisherNode>());
   rclcpp::shutdown();
-  return 0;s
+  return 0;
 }

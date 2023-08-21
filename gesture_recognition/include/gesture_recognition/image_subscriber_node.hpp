@@ -13,7 +13,7 @@ public:
 
 private:
     void imageProcessing(const sensor_msgs::msg::Image::SharedPtr image_msg) const;
-	rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber;
+	rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscriber_;
     std::shared_ptr<GestureRecognition> gesture_recognition_;
 };
 
