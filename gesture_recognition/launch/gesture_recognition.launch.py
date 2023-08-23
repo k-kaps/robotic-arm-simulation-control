@@ -9,6 +9,7 @@ from launch.event_handlers import (OnProcessStart, OnProcessExit)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 from launch_ros.actions import Node
+from moveit_configs_utils import MoveItConfigsBuilder
 
 import xacro
 
@@ -25,6 +26,23 @@ def generate_launch_description():
         executable = "image_subscriber_node",
         name = "image_subscriber_node"
     )
+
+    moveit_config = (
+        MoveItConfigsBuilder("six_dof_arm")
+        .robot_description(file_path="config/six_dof_arm.urdf.xacro")
+        .trajectory_execution(file_path="config/moveit_controllers.yaml")
+        .planning_scene_monitor(publish_robot_description= True, publish_robot_description_semantic=True)
+        .planning_pipelines(pipelines=["ompl"])
+        .to_moveit_configs()
+	)
+    
+    moveit_node = Node(
+        package="moveit_ros_move_group",
+        executable="move_group",
+        name="move_group",
+        output="screen",
+        parameters=[moveit_config.to_dict()]
+	)
     
     gazebo = IncludeLaunchDescription(
 			PythonLaunchDescriptionSource([os.path.join(
@@ -83,6 +101,7 @@ def generate_launch_description():
 					on_exit=[image_publisher_node, image_subscriber_node],)
 					),
 		gazebo, 
+        moveit_node,
 		node_robot_state_publisher,
 		spawn_entity,
     ])
