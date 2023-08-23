@@ -12,6 +12,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(trajectory_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -32,7 +33,7 @@ add_executable(image_publisher_node src/image_publisher_node.cpp)
 ament_target_dependencies(image_publisher_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
 
 add_executable(image_subscriber_node src/image_subscriber_node.cpp src/gesture_recognition.cpp)
-ament_target_dependencies(image_subscriber_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
+ament_target_dependencies(image_subscriber_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV trajectory_msgs)
 
 install(TARGETS image_publisher_node image_subscriber_node
         DESTINATION lib/${PROJECT_NAME})
